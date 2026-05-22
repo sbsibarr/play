@@ -23,17 +23,17 @@
     }
   </style>
   <script>
-    // Tell Ruffle how to scale the game BEFORE the script loads
+    // Tell Ruffle how to scale the game before loading
     window.RufflePlayer = window.RufflePlayer || {};
     window.RufflePlayer.config = {
-      "letterbox": "on",       /* Adds black bars automatically to keep aspect ratio */
+      "letterbox": "on",       /* Centers the game and adds black bars automatically */
       "scale": "showAll",      /* Shows the entire game on the screen */
-      "forceScale": true,      /* Forces the game to scale even if it wants to stay small */
+      "forceScale": true,      /* Forces the game to fit your screen size */
       "quality": "high"        /* Keeps the graphics sharp */
     };
   </script>
-  <!-- Load the Ruffle player -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ruffle/0.1.0/ruffle.js"></script>
+  <!-- Load the official, verified Ruffle player -->
+  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
 </head>
 <body>
   <div id="game-container">
