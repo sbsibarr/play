@@ -1,43 +1,45 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Fireboy And Watergirl</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      background: black;
-      overflow: hidden;
-    }
-    #game-container {
-      width: 100%;
-      height: 100%;
-    }
-    /* Forces Ruffle to take up the full screen space */
-    embed, object, ruffle-player {
-      width: 100% !important;
-      height: 100% !important;
-      display: block;
-    }
-  </style>
-  <script>
-    // Tell Ruffle how to scale the game before loading
-    window.RufflePlayer = window.RufflePlayer || {};
-    window.RufflePlayer.config = {
-      "letterbox": "on",       /* Centers the game and adds black bars automatically */
-      "scale": "showAll",      /* Shows the entire game on the screen */
-      "forceScale": true,      /* Forces the game to fit your screen size */
-      "quality": "high"        /* Keeps the graphics sharp */
-    };
-  </script>
-  <!-- Load the official, verified Ruffle player -->
-  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
-</head>
-<body>
-  <div id="game-container">
-    <embed src="fireboyandwatergirl.swf"></embed>
-  </div>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fireboy And Watergirl</title>
+    <style>
+      /* Clean background and remove margins */
+      html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- The game will render inside this div -->
+    <div id="root"></div>
+
+    <!-- 1. This loads Ruffle from the official CDN -->
+    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+
+    <!-- 2. This is the exact script they use to scale and center the game -->
+    <script>
+      function embedSWF(url, cont) {
+        let ruffle = window.RufflePlayer.newest(),
+          player = Object.assign(
+            document.getElementById(cont).appendChild(ruffle.createPlayer()),
+            {
+              style:
+                "width: 100%; height: 100%; position: absolute; top: 0; left: 0;",
+            }
+          );
+
+        player.load({ url });
+      }
+
+      // Tell the page to load your game file
+      embedSWF("fireboyandwatergirl.swf", "root");
+    </script>
+  </body>
 </html>
