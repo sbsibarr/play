@@ -14,6 +14,29 @@
         background-color: black;
         overflow: hidden;
       }
+
+      /* Center the game and keep it locked to its original 4:3
+         aspect ratio. The surrounding black area letterboxes the
+         viewport so no sprites clip off the edge. */
+      #root {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      ruffle-player {
+        display: block;
+        aspect-ratio: 4 / 3;
+        height: 100%;
+      }
+      /* When the viewport is taller than 4:3, fit by width instead. */
+      @media (max-aspect-ratio: 4 / 3) {
+        ruffle-player {
+          height: auto;
+          width: 100%;
+        }
+      }
     </style>
   </head>
   <body>
@@ -30,8 +53,8 @@
           player = Object.assign(
             document.getElementById(cont).appendChild(ruffle.createPlayer()),
             {
-              style:
-                "width: 100%; height: 100%; position: absolute; top: 0; left: 0;",
+              /* Sizing is handled by the CSS above (locked to 4:3). */
+              style: "display: block;",
             }
           );
 
